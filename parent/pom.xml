@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>reactor</artifactId>
+        <groupId>net.betzel.osgi.karaf.vaadin</groupId>
+        <version>2.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>parent</artifactId>
+    <packaging>pom</packaging>
+
+    <description>Bill-of-materials</description>
+
+    <properties>
+        <osgi.core.version>6.0.0</osgi.core.version>
+        <osgi.annotation.version>6.0.1</osgi.annotation.version>
+        <jsoup.version>1.8.3</jsoup.version>
+        <karaf.version>4.1.2</karaf.version>
+        <vaadin.version>8.1.6</vaadin.version>
+        <gentryref.version>1.2.0.vaadin1</gentryref.version>
+        <vaadin.slf4j.jdk14.version>1.6.1</vaadin.slf4j.jdk14.version>
+        <vaadin.atmosphere.version>2.4.11.vaadin2</vaadin.atmosphere.version>
+        <javax.servlet.api>3.1.0</javax.servlet.api>
+        <bnd.maven.plugin>3.3.0</bnd.maven.plugin>
+        <pax.web.version>6.0.7.1</pax.web.version>
+        <maven.jar.plugin>3.0.2</maven.jar.plugin>
+        <maven.clean.plugin>3.0.0</maven.clean.plugin>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax</groupId>
+                <artifactId>web</artifactId>
+                <version>${pax.web.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

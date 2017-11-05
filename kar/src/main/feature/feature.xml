@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="osgi-karaf-vaadin-features-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.4.0 http://karaf.apache.org/xmlns/features/v1.4.0">
+
+    <feature name="osgi-karaf-vaadin" description="Web UI bundles" version="${project.version}" start-level="80">
+        <bundle start-level="80">mvn:org.jsoup/jsoup/${jsoup.version}</bundle>
+        <bundle start-level="80">mvn:com.vaadin.external.slf4j/vaadin-slf4j-jdk14/${vaadin.slf4j.jdk14.version}</bundle>
+        <bundle start-level="80">mvn:com.vaadin.external.atmosphere/atmosphere-runtime/${vaadin.atmosphere.version}</bundle>
+        <bundle start-level="80">mvn:com.vaadin.external/gentyref/${gentryref.version}</bundle>
+        <bundle start-level="80">mvn:com.vaadin/vaadin-shared/${vaadin.version}</bundle>
+        <bundle start-level="90">mvn:com.vaadin/vaadin-server/${vaadin.version}</bundle>
+        <bundle start-level="90">mvn:com.vaadin/vaadin-osgi-integration/${vaadin.version}</bundle>
+        <bundle start-level="90">mvn:com.vaadin/vaadin-client-compiled/${vaadin.version}</bundle>
+        <bundle start-level="90">mvn:com.vaadin/vaadin-themes/${vaadin.version}</bundle>
+        <bundle start-level="90">mvn:com.vaadin/vaadin-push/${vaadin.version}</bundle>
+        <bundle start-level="90">mvn:net.betzel.osgi.karaf.vaadin/api/${project.version}</bundle>
+        <bundle start="false">mvn:net.betzel.osgi.karaf.vaadin/dynamic/${project.version}</bundle>
+        <bundle start-level="90">mvn:net.betzel.osgi.karaf.vaadin/service/${project.version}</bundle>
+    </feature>
+
+</features>
