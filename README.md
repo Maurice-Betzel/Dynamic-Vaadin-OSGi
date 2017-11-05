@@ -24,7 +24,7 @@ Start the dynamic bundle on the Karaf console to see the dynamic parts working.
 
 Any new Ideas regarding this project are always welcome!
 
-### Dynamic Vaadin OSGi License
+### Dynamic Vaadin on OSGi License
 
 Copyright (C) 2016 Maurice Betzel
  
