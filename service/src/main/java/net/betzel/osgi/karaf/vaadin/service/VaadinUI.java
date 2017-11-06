@@ -11,6 +11,7 @@ import javafx.collections.ObservableMap;
 import javafx.collections.WeakMapChangeListener;
 import net.betzel.osgi.karaf.vaadin.api.VaadinComponent;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -18,12 +19,14 @@ import java.util.Objects;
 @Push(PushMode.MANUAL)
 public class VaadinUI extends UI {
 
+    private HashMap<String, Component> componentInstances;
     private ObservableMap<String, VaadinComponent> observableVaadinComponents;
     private MapChangeListener<String, VaadinComponent> vaadinComponentChangeListener;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         observableVaadinComponents = VaadinSession.getCurrent().getAttribute(ObservableMap.class);
+        componentInstances = VaadinSession.getCurrent().getAttribute(HashMap.class);
 
         VerticalLayout verticalLayout = new VerticalLayout();
         TextField name = new TextField();
@@ -34,7 +37,9 @@ public class VaadinUI extends UI {
         });
         verticalLayout.addComponents(name, button);
         for(Map.Entry<String, VaadinComponent> entry : observableVaadinComponents.entrySet()) {
-            verticalLayout.addComponent(entry.getValue().getInstance(entry.getKey()));
+            Component component = entry.getValue().getInstance(entry.getKey());
+            componentInstances.put(entry.getKey(), component);
+            verticalLayout.addComponent(component);
         }
         setContent(verticalLayout);
 
@@ -43,7 +48,9 @@ public class VaadinUI extends UI {
                 UI ui = getUI();
                 if (Objects.nonNull(ui) && ui.isAttached()) {
                     ui.access(() -> {
-                        verticalLayout.addComponent(change.getValueAdded().getInstance(change.getKey()));
+                        Component component = change.getValueAdded().getInstance(change.getKey());
+                        componentInstances.put(change.getKey(), component);
+                        verticalLayout.addComponent(component);
                         ui.push();
                     });
                 }
@@ -51,7 +58,8 @@ public class VaadinUI extends UI {
                 UI ui = getUI();
                 if (Objects.nonNull(ui) && ui.isAttached()) {
                     ui.access(() -> {
-                        verticalLayout.removeComponent(change.getValueRemoved().getInstance());
+                        Component component = componentInstances.remove(change.getKey());
+                        verticalLayout.removeComponent(component);
                         ui.push();
                     });
                 }

@@ -33,11 +33,15 @@ public class VaadinServletComponent extends VaadinServlet implements SessionInit
     @Override
     public void sessionInit(SessionInitEvent event) throws ServiceException {
         VaadinSession.getCurrent().setAttribute(ObservableMap.class, observableVaadinComponents);
+        VaadinSession.getCurrent().setAttribute(HashMap.class, new HashMap<String, com.vaadin.ui.Component>());
     }
 
     @Override
     public void sessionDestroy(SessionDestroyEvent event) {
         VaadinSession.getCurrent().setAttribute(ObservableMap.class, null);
+        Map map = VaadinSession.getCurrent().getAttribute(HashMap.class);
+        map.clear();
+        VaadinSession.getCurrent().setAttribute(HashMap.class, null);
     }
 
     @Reference(cardinality = ReferenceCardinality.MULTIPLE, service = VaadinComponent.class, policy = ReferencePolicy.DYNAMIC)
